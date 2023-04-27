@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Animais } from './animais';
 import { Observable } from 'rxjs/internal/Observable';
 import { TokenService } from '../autenticacao/token.service';
+import { environment } from 'src/environments/environment';
 
-const API = 'http://localhost:3000';
+const API = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
