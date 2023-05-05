@@ -4,6 +4,7 @@ import { Animais, Animal } from './animais';
 import { Observable } from 'rxjs/internal/Observable';
 import { TokenService } from '../autenticacao/token.service';
 import { environment } from 'src/environments/environment';
+import { catchError, mapTo, of, throwError } from 'rxjs';
 
 const API = environment.apiUrl;
 const NOT_MODIFIED = '304';
@@ -27,6 +28,15 @@ export class AnimaisService {
     return this.http.delete<Animal>(`${API}/photos/${id}`)
   }
 
+  curtir(id: number): Observable<boolean> {
+    return this.http.post(`${API}/photos/${id}/like`, {},
+      {observe: 'response'})
+      .pipe(
+        mapTo(true), catchError((error) => {
+        return error.status === NOT_MODIFIED ? of(false) : throwError(error);
+      })
+    );
+  }
 
 
 }
