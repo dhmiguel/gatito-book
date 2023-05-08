@@ -1,8 +1,8 @@
 <div *ngIf="comentarios$ | async as comentarios">
 
-    <ul class="list-unstyled">
+    <ul class="list-unstyled comentario-list">
 
-        <li *ngfor="let comentario of comentarios">
+        <li *ngFor="let comentario of comentarios">
 
             <p class="text-dark font-wight-bold mr-1">
                 {{ comentario.userName }}
